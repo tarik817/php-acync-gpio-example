@@ -1,0 +1,12 @@
+{
+    "require": {
+        "react/react": "^0.4.2",
+        "react/filesystem": "^0.1.2",
+        "guzzlehttp/guzzle": "^6.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    }
+}
