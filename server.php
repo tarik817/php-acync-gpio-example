@@ -1,42 +1,29 @@
 <?php
-$param = getopt('',['url:']);
-if (!isset($param['url']) || !$param['url'] || !is_string($param['url'])) {
-    echo "Please provide --url parameter \n";
-    die;
-}
-
 require "vendor/autoload.php";
 
+use PhpGpio\Gpio;
+use PhpGpio\GpioInterface;
 use React\EventLoop\Factory;
-use React\Filesystem\Filesystem;
 
 // Define variables.
-$url = $param['url'];
-$DSPin = '';
-$LEDRegularBlinkPin = '';
-$LEDSendDataBlinkPin = '';
-$pinToggleState = 1;
-$filePath = './test.txt';
-$counter = 1;
+define('PIN_1', 4);
+define('PIN_2', 7);
+$pin1ToggleState = 1;
+$pin2ToggleState = 1;
 
 $loop = Factory::create();
-$filesystem = Filesystem::create($loop);
 
-$DSValuePath = new \App\PinInit($filesystem, $DSPin, 'in');
-$LEDSendDataPath = new \App\PinInit($filesystem, $DSPin, 'out');
-$LEDRegularBlinkPath = new \App\PinInit($filesystem, $DSPin, 'out');
+$gpio = new Gpio([PIN_1, PIN_2]);
+$gpio->setup(PIN_1, GpioInterface::DIRECTION_OUT)
+    ->setup(PIN_2, GpioInterface::DIRECTION_OUT);
 
-$loop->addPeriodicTimer(5, function () use ($filesystem, $filePath){
-    $filesystem->file($filePath)->open('w')->then(function ($stream) {
-        $stream->write(1);
-        $stream->end();
-    });
-    echo 'Timer' . PHP_EOL;
+$loop->addPeriodicTimer(5, function () use ($gpio, &$pin2ToggleState){
+    $gpio->write(PIN_OUT, $pin2ToggleState);
+    ($pin2ToggleState) ? $pin2ToggleState = 0 : $pin2ToggleState = 1;
 });
 
-$loop->addPeriodicTimer(1, function () use ($filesystem, $LEDRegularBlinkPin, &$pinToggleState) {
-    $filesystem->file($LEDRegularBlinkPin)->putContents($pinToggleState);
-    ($pinToggleState) ? $pinToggleState = 0 : $pinToggleState = 1;
+$loop->addPeriodicTimer(1, function () use ($gpio, &$pin1ToggleState) {
+    ($pin1ToggleState) ? $pin1ToggleState = 0 : $pin1ToggleState = 1;
 });
 
 $loop->run();

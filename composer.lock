@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "91df601f4923b8706f884092e1b14f36",
+    "content-hash": "fb688fedd2afd7b9b01098f6cfa25714",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -1146,6 +1146,60 @@
                 "uri"
             ],
             "time": "2018-01-15T21:00:49+00:00"
+        },
+        {
+            "name": "tgeindre/php-gpio",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/t-geindre/php-gpio.git",
+                "reference": "6b9474c1026b896c9f8cf70ddfd630fc00cb54f2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/t-geindre/php-gpio/zipball/6b9474c1026b896c9f8cf70ddfd630fc00cb54f2",
+                "reference": "6b9474c1026b896c9f8cf70ddfd630fc00cb54f2",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.0"
+            },
+            "require-dev": {
+                "atoum/atoum": "^2.7",
+                "m6web/coke": "^2.1",
+                "m6web/symfony2-coding-standard": "^3.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "PhpGpio": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Thierry Geindre"
+                }
+            ],
+            "description": "GPIO-related utils & toolkit PHP library",
+            "homepage": "https://github.com/t-geindre/php-gpio",
+            "keywords": [
+                "GPIO",
+                "chip",
+                "chipset",
+                "hardware",
+                "input",
+                "output",
+                "pin",
+                "port",
+                "raspberry",
+                "raspberry pi",
+                "sensors"
+            ],
+            "time": "2016-06-14T19:21:01+00:00"
         },
         {
             "name": "tivie/php-os-detector",
